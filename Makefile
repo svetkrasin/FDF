@@ -3,34 +3,78 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: skrasin <skrasin@student.42.fr>            +#+  +:+       +#+         #
+#    By: svet <svet@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/03/11 11:03:57 by skrasin           #+#    #+#              #
-#    Updated: 2020/03/11 11:28:01 by skrasin          ###   ########.fr        #
+#    Updated: 2021/04/11 22:15:57 by svet             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = fdf
-CC = gcc
-CFLGS = -Wextra -Wall -Werror
-FRAME = -lmlx -framework OpenGL -framework AppKit
-SRC = *.c
-LIB = Libft/libft.a
-MLX = ./minilibx_macos/
+#################
+##  VARIABLES  ##
+#################
 
-all: $(NAME)
+#	Sources
+srcdir := ./srcs/
+srcdirs := init
+sources := $(foreach dir, $(addprefix $(srcdir), $(srcdirs)), $(wildcard $(dir)/*.c))
 
-$(NAME):
-	make -s -C Libft
-	make -s -C minilibx_macos
-	$(CC) $(CFLGS) $(SRC) $(LIB) $(FRAME) -L $(MLX) -o $(NAME)
+# Includes
+LIBFT := ./Libft/
+MLX := ./minilibx_macos/
+incdir := ./includes
+incdir += $(MLX) $(LIBFT)
+
+#	Output
+NAME := fdf
+
+#	Compiler
+CFLAGS := -g -Ofast -Wall -Wextra -Werror -pedantic
+# -Weverything -Wno-poison-system-directories -Wno-cast-align -Wno-cast-qual
+# -Wno-float-equal
+CPPFLAGS := $(foreach dir, $(incdir), $(addprefix -I , $(dir)))
+
+#CPPFLAGS := $(addprefix -I ,$(incdir))
+
+#################
+##  AUTO       ##
+#################
+
+SHELL := /bin/sh
+objects := $(patsubst %.c, %.o, $(sources))
+objects_bonus := $(patsubst %.c, %.o, $(wildcard $(addprefix $(srcdir), $(srcdirs_bonus))/*.c))
+# .PRECIOUS: %.o
+
+#################
+##  TARGETS    ##
+#################
+
+#	First target
+all: lib $(NAME)
+
+#	Compiling libraries
+lib:
+	$(MAKE) -C $(LIBFT)
+	$(MAKE) -C $(MLX)
+
+#	Compiling the project
+$(NAME) : $(objects)
+	$(LINK.c) -o $(NAME) $(objects) $(LIBFT)libft.a $(MLX)libmlx.dylib
+	install_name_tool -change libmlx.dylib @loader_path/$(MLX)/libmlx.dylib $(NAME)
+
+#	Removing objects
 clean:
-	make -C Libft clean
-	make -C minilibx_macos clean
-fclean:
-	rm -f $(NAME)
-	make -s -C Libft fclean
-	make -s -C minilibx_macos clean
-re: fclean $(NAME)
+#	@$(MAKE) -C $(LIBFT) clean
+#	@$(MAKE) -C $(MLX) clean
+	-$(RM) $(objects) $(objects_bonus)
 
-.PHONY: all clean fclean re
+#	Removing objects and the project
+fclean: clean
+	$(MAKE) -C $(MLX) clean
+	$(MAKE) -C $(LIBFT) fclean
+	-$(RM) $(NAME)
+
+#	All removing than compiling
+re: fclean all
+
+.PHONY: all clean fclean re bonus srcs includes
