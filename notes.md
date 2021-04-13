@@ -1,0 +1,5 @@
+#include <fcntl.h> -> open()
+#include <unistd.h> -> read() write() close()
+#include <stdlib.h> -> malloc() free() exit()
+#include <stdio.h> -> perror()
+#icnlude <string.h> -> strerror()

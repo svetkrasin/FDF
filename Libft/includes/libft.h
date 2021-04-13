@@ -6,7 +6,7 @@
 /*   By: svet <svet@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/16 11:33:08 by skrasin           #+#    #+#             */
-/*   Updated: 2020/10/16 15:53:05 by svet             ###   ########.fr       */
+/*   Updated: 2021/04/12 17:16:23 by svet             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,6 @@
 # include "ft_list_bonus.h"
 # include "ft_dlist.h"
 # include "ft_printf.h"
+# include "ft_matrix.h"
 
 #endif

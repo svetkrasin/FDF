@@ -6,7 +6,7 @@
 #    By: svet <svet@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/03/11 11:03:57 by skrasin           #+#    #+#              #
-#    Updated: 2021/04/11 22:15:57 by svet             ###   ########.fr        #
+#    Updated: 2021/04/12 21:42:16 by svet             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ sources := $(foreach dir, $(addprefix $(srcdir), $(srcdirs)), $(wildcard $(dir)/
 LIBFT := ./Libft/
 MLX := ./minilibx_macos/
 incdir := ./includes
-incdir += $(MLX) $(LIBFT)
+#incdir += $(MLX) $(LIBFT)
 
 #	Output
 NAME := fdf
@@ -54,7 +54,7 @@ all: lib $(NAME)
 
 #	Compiling libraries
 lib:
-	$(MAKE) -C $(LIBFT)
+	$(MAKE) -C $(LIBFT) bonus
 	$(MAKE) -C $(MLX)
 
 #	Compiling the project
