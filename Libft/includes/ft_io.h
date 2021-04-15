@@ -6,12 +6,13 @@
 /*   By: svet <svet@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/18 15:26:49 by svet              #+#    #+#             */
-/*   Updated: 2020/10/19 12:55:33 by svet             ###   ########.fr       */
+/*   Updated: 2021/04/13 10:08:00 by svet             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_IO_H
 # define FT_IO_H
+# include "ft_printf.h"
 # include <sys/_types/_ssize_t.h>
 
 void	ft_putchar_fd(int c, int fd);

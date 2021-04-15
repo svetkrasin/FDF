@@ -6,7 +6,7 @@
 /*   By: svet <svet@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/10 18:42:23 by svet              #+#    #+#             */
-/*   Updated: 2021/04/12 22:55:27 by svet             ###   ########.fr       */
+/*   Updated: 2021/04/13 16:17:08 by svet             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,7 @@ t_matrix	*ft_mtxnew(const size_t rows, const size_t columns)
 	(matrix->content = (long double *)ft_memalloc(columns * rows *
 												sizeof(long double))) == NULL)
 		return (NULL);
+	matrix->rows = rows;
+	matrix->columns = columns;
 	return (matrix);
 }

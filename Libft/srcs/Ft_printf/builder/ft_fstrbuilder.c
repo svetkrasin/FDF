@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../Libft/includes/libft.h"
+#include "libft.h"
 #include "limits.h"
 #include <sys/_types/_null.h>
 

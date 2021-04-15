@@ -6,7 +6,7 @@
 /*   By: svet <svet@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/09 16:33:02 by skrasin           #+#    #+#             */
-/*   Updated: 2021/04/12 22:09:23 by svet             ###   ########.fr       */
+/*   Updated: 2021/04/13 18:53:21 by svet             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,12 @@ int		main(int argc, char **argv)
 			perror("Unable establish connection with Window Server");
 		else if (parse_file(fd, &map) == 0)
 			perror("Wrong file format");
-		else if ((win_ptr = mlx_new_window(mlx_ptr, 1000, 1000, "fdf")) == NULL)
+		else if ((win_ptr = mlx_new_window(mlx_ptr, 1920, 1080, "fdf")) == NULL)
 			perror("Fails to create a window");
+		else
+		{
+			mlx_loop(mlx_ptr);
+		}
 	}
 	else
 		ft_putstr("Usage : ./fdf <filename> [ case_size z_size ]\n");
